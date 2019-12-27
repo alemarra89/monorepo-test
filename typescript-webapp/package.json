@@ -16,6 +16,9 @@
     "react-scripts": "3.3.0",
     "typescript": "^3.7.4"
   },
+  "peerDependencies": {
+    "moment": "^2.24.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

@@ -1,0 +1,10 @@
+{
+    "version": "1.0.0",
+    "description": "Package.json del monorepo",
+    "scripts": {},
+    "author": "Alessandro Marra",
+    "license": "ISC",
+    "dependencies": {
+        "moment": "^2.24.0"
+    }
+}

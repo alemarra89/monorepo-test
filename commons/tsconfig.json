@@ -1,12 +1,19 @@
 {
-    "compilerOptions": {
-        "target": "ES2015",
-        "module": "commonjs",
-        "declaration": true,
-        "outDir": "./lib",
-        "strict": true
-    },
-    "include": [
-        "**/*"
-    ]
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "commonjs",
+    "declaration": true, //emit an .d.ts definitions files along with compiled JavaScript (so export types with "export" keyword)
+    "outDir": "./build", //output directory where will be placed the transpiled JavaScript
+    "strict": true,
+    "allowUnusedLabels": false,
+    "diagnostics": true,
+    //"moduleResolution": "Node",
+    "sourceMap": false,
+    "strictNullChecks": true,
+    "traceResolution": false, //report module resolution log messages
+    "watch": false
+  },
+  "scripts": {
+    "build": "tsc"
+  }
 }

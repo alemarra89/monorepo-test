@@ -2,12 +2,29 @@
   "name": "@sparkasse/commons",
   "version": "1.0.0",
   "description": "Pacchetto delle funzionalità in comune tra web e mobile",
-  "main": "index.js",
+  "main": "build/index.js",
   "typings": "index.d.ts",
-  "scripts": {},
+  "scripts": {
+    "build2": "babel prelogin -d build"
+  },
   "author": "Alessandro Marra",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^3.7.4"
+    "typescript": "^3.7.4",
+    "@babel/cli": "^7",
+    "@babel/core": "^7.5.5",
+    "@babel/runtime": "^7.5.5",
+    "@babel/preset-env": "^7.1.6"
+  },
+  "peerDependencies": {
+    "moment": "^2.24.0"
+  },
+  "dependencies": {
+    "change-case": "^4.1.1"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
   }
 }

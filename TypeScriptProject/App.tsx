@@ -26,13 +26,17 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import moment from "moment";
+
 import { getPrelogin } from "@sparkasse/commons";
 
 const App = () => {
 
-   getPrelogin();
+  getPrelogin();
 
-  //GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
+  GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
+
+  console.log('moment mobile', moment());
 
   return (
     <Fragment>
