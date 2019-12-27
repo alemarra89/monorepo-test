@@ -1,8 +1,6 @@
-const moment = require('moment');
-
 import * as changeCase from 'change-case';
 
-export const getPrelogin = async () => {
+export const getPrelogin = async (): Promise<any> => {
 
   try {
     let response = await fetch(

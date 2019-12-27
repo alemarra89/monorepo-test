@@ -5,6 +5,7 @@
     "author": "Alessandro Marra",
     "license": "ISC",
     "dependencies": {
-        "moment": "^2.24.0"
+        "moment": "^2.24.0",
+        "change-case": "^4.1.1"
     }
 }

@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Pacchetto delle funzionalità in comune tra web e mobile",
   "main": "build/index.js",
-  "typings": "index.d.ts",
+  "typings": "build/index.d.ts",
   "scripts": {
-    "build2": "babel prelogin -d build"
+    "build": "tsc --project tsconfig.json"
   },
   "author": "Alessandro Marra",
   "license": "ISC",
@@ -17,9 +17,6 @@
     "@babel/preset-env": "^7.1.6"
   },
   "peerDependencies": {
-    "moment": "^2.24.0"
-  },
-  "dependencies": {
     "change-case": "^4.1.1"
   },
   "babel": {
