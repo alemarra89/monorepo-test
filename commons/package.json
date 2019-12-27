@@ -1,0 +1,13 @@
+{
+  "name": "@sparkasse/commons",
+  "version": "1.0.0",
+  "description": "Pacchetto delle funzionalità in comune tra web e mobile",
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "scripts": {},
+  "author": "Alessandro Marra",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^3.7.4"
+  }
+}
