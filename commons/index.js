@@ -1,3 +1,7 @@
-const getPrelogin = require('./prelogin/index');
+//  CommonJS spec
+//const getPrelogin = require('./prelogin/index');
+//module.exports = {getPrelogin};
 
-module.exports = {getPrelogin};
+// ES6 spec
+export {getPrelogin} from './prelogin';
+

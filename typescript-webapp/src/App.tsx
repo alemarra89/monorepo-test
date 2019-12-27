@@ -2,13 +2,13 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-// import getPrelogin from "@sparkasse/commons";
+import {getPrelogin} from "@sparkasse/commons";
 
 const App: React.FC = () => {
 
   console.log('mario');
 
-  // getPrelogin();
+  getPrelogin();
 
   return (
     <div className="App">

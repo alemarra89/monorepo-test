@@ -26,11 +26,11 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-// import { getPrelogin } from "@sparkasse/commons";
+import { getPrelogin } from "@sparkasse/commons";
 
 const App = () => {
 
-  // getPrelogin();
+   getPrelogin();
 
   //GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
 
