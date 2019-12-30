@@ -4,14 +4,14 @@ import { ExtAction } from './actions';
 export interface UserState {
   logged: boolean,
   name: string
-}
+};
 
 const initialState: UserState = {
   logged: false,
   name: ''
 }
 
-export function loginReducer(
+export function preloginReducer(
   state = initialState,
   action: ExtAction
 ): UserState {

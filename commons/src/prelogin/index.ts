@@ -1,5 +1,8 @@
 import * as changeCase from 'change-case';
 
+export { preloginReducer } from './reducer';
+export { getPreloginSelector } from './selectors';
+
 export const getPrelogin = async (): Promise<any> => {
 
   try {

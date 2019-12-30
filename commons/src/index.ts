@@ -3,5 +3,4 @@
 //module.exports = {getPrelogin};
 
 // ES6 spec
-export {getPrelogin} from './prelogin';
-
+export { getPrelogin, preloginReducer, getPreloginSelector } from './prelogin';

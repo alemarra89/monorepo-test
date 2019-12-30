@@ -1,4 +1,4 @@
-import { Action } from "redux";
+import { Action, AnyAction } from "redux";
 
 import { ThunkAction } from 'redux-thunk'
 
@@ -25,7 +25,8 @@ export interface ExtAction extends Action {
 }
 
 
-export function getPreloginStart(): ExtAction {
+export function getPreloginStart(): AnyAction {
+  console.log('consolloggo cose qua');
   return {
     type: types.GET_PRELOGIN_START,
     payload: {}

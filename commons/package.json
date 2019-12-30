@@ -14,5 +14,8 @@
   },
   "peerDependencies": {
     "change-case": "^4.1.1"
+  },
+  "dependencies": {
+    "reselect": "^4.0.0"
   }
 }
