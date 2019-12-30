@@ -10,18 +10,9 @@
   "author": "Alessandro Marra",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^3.7.4",
-    "@babel/cli": "^7",
-    "@babel/core": "^7.5.5",
-    "@babel/runtime": "^7.5.5",
-    "@babel/preset-env": "^7.1.6"
+    "typescript": "^3.7.4"
   },
   "peerDependencies": {
     "change-case": "^4.1.1"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ]
   }
 }
