@@ -1,74 +1,77 @@
-import { Action, AnyAction } from "redux";
-
 import { ThunkAction } from 'redux-thunk'
 
-import * as types from './types';
-import { UserState } from './reducer';
+import {
+  GET_PRELOGIN_START,
+  GET_PRELOGIN_SUCCESS,
+  GET_PRELOGIN_ERROR,
+  PreloginParams,
+  PreloginState,
+  PreloginActionTypes,
+  GetPreloginStartAction,
+  GetPreloginSuccessAction,
+  GetPreloginErrorAction,
+  ErrorState
+} from './types';
 
-/*
-export interface GetPreloginStart extends Action {
-    type: string;
-}
-
-
-export function getPreloginStart(): Action {
-    return {
-        type: types.GET_PRELOGIN_START
-    }
-}
-*/
-
-
-export interface ExtAction extends Action {
-  type: string;
-  payload?: object;
-}
-
-
-export function getPreloginStart(): AnyAction {
+export function getPreloginStart(): GetPreloginStartAction {
   console.log('consolloggo cose qua');
   return {
-    type: types.GET_PRELOGIN_START,
-    payload: {}
+    type: GET_PRELOGIN_START
   }
 }
 
-export const thunkSendMessage = (message: string): ThunkAction<void, UserState, null, Action<string>> => async dispatch => {
-  const asyncResp = await exampleAPI()
-  dispatch(getPreloginSuccess(asyncResp))
-}
-function exampleAPI() {
-  return Promise.resolve('Async Chat Bot')
-}
-
-
-
-export function getPreloginSuccess(payload: any): ExtAction {
+export function getPreloginSuccess(payload: PreloginState): GetPreloginSuccessAction {
   return {
-    type: types.GET_PRELOGIN_SUCCESS,
+    type: GET_PRELOGIN_SUCCESS,
     payload
   }
 }
 
-/*
+export function getPreloginError(payload: ErrorState): GetPreloginErrorAction {
+  return {
+    type: GET_PRELOGIN_ERROR,
+    payload
+  }
+}
 
-export const fetchAuthorityEntities = () => async (
+// export const getPrelogin = (preloginParams: PreloginParams): ThunkAction<void, PreloginState, null, Action<string>> => async (
+
+// ThunkAction prende in input 4 parametri
+// ThunkAction<ResultType, StateType, ExtraArgumentType, ActionType extends Action>
+export const getPrelogin = (preloginParams: PreloginParams): ThunkAction<void, PreloginState, null, PreloginActionTypes> => async (
   dispatch,
   _,
   extraArguments
 ) => {
-  dispatch(fetchAuthorityEntitiesStart());
-  //dispatch(showLoader(LoadersKey.profile.identityDocument.entities));
-  try {
-    const response = await api(extraArguments)(
-      fetchPost(FETCH_AUTHORITY_ENTITIES_URL, {}, {})
-    );
-    dispatch(fetchAuthorityEntitiesSuccess(response.data));
-  } catch (err) {
+  // const asyncResp = await exampleAPI()
+  console.log('asd', _, extraArguments);
+  dispatch(getPreloginStart());
 
-  } finally {
-  //dispatch(hideLoader(LoadersKey.profile.identityDocument.entities));
-  }
-};
+  let url = 'https://ihbnext.cedacri.it/hb3-api/api/public/prelogin';
+  url += '?abi=' + preloginParams.abi;
+  url += '&canale=' + preloginParams.canale;
 
-*/
+  api<PreloginState | ErrorState>(url).then((preloginResponse) => {
+    console.log('preloginResponse', preloginResponse);
+    dispatch(getPreloginSuccess(preloginResponse as PreloginState));
+  }).catch(error => {
+    /* show error message */
+    dispatch(getPreloginError(error as ErrorState));
+  })
+
+
+}
+
+
+
+// Implementation code where T is the returned data shape
+function api<T>(url: string): Promise<T> {
+  return fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(response.statusText)
+      }
+      return response.json()
+    })
+
+}

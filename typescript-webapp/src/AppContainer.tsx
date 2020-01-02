@@ -1,28 +1,25 @@
-import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
 import App from './App'
-import { UserState } from '@sparkasse/commons/build/prelogin/reducer';
-import { getPreloginSelector } from '@sparkasse/commons/build/prelogin';
-import { getPreloginStart } from '@sparkasse/commons/build/prelogin/actions';
+import { PreloginState, PreloginParams, GetPreloginStartAction, getPrelogin, preloginData } from '@sparkasse/commons';
+import { ThunkDispatch } from 'redux-thunk';
 
-const mapStateToProps = (state: UserState) => {
+const mapStateToProps = (state: PreloginState) => {
   return {
-    logged: getPreloginSelector(state)
+    preloginData: preloginData(state)
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<PreloginState, null, GetPreloginStartAction>) => {
   return {
-    onGetPreloginClick: () => {
-      dispatch(getPreloginStart());
-    }
+    onGetPreloginClick: (preloginParams:PreloginParams) => dispatch(getPrelogin(preloginParams))
   }
 }
 
-// export default connect<{}, {}, PassedProps>(mapStateToProps, mapDispatchToProps)    (ChildComponent);
-
-
+export interface PreloginProps {
+  preloginData: number,
+  onGetPreloginClick: Function
+}
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App)
+)(App);

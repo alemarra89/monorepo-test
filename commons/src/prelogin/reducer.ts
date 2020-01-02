@@ -1,36 +1,30 @@
-import { GET_PRELOGIN_START, GET_PRELOGIN_SUCCESS, GET_PRELOGIN_ERROR } from './types';
-import { ExtAction } from './actions';
+import { GET_PRELOGIN_SUCCESS, GET_PRELOGIN_ERROR, PreloginState } from './types';
+import { AnyAction } from 'redux';
 
-export interface UserState {
-  logged: boolean,
-  name: string
-};
-
-const initialState: UserState = {
-  logged: false,
-  name: ''
+const initialState: PreloginState = {
+  codiceAbi: '',
+  codiceGruppo: '',
+  codiceIstituto: 0
 }
 
 export function preloginReducer(
   state = initialState,
-  action: ExtAction
-): UserState {
+  action: AnyAction
+): PreloginState {
+  console.log('action', action);
   switch (action.type) {
-    case GET_PRELOGIN_START:
-      return {
-        ...state
-      }
     case GET_PRELOGIN_SUCCESS:
+      console.log('action GET_PRELOGIN_SUCCESS', state);
       return {
         ...state,
-        logged: true,
-        name: 'Mario Scalas'
+        codiceAbi: action.payload.codiceAbi,
+        codiceIstituto: action.payload.codiceIstituto,
+        codiceGruppo: action.payload.codiceGruppo
       }
     case GET_PRELOGIN_ERROR:
+      console.log('action GET_PRELOGIN_ERROR');
       return {
-        ...state,
-        logged: false,
-        name: ''
+        ...initialState
       }
     default:
       return state

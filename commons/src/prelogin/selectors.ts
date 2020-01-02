@@ -1,15 +1,14 @@
-import { createSelector } from 'reselect';
+import { createSelector } from "reselect";
+import { PreloginState } from "./types";
 
-import { UserState } from './reducer';
-
-export const isLogged = (state: UserState) => state.logged;
-
-
-export const prelogin = (state: any) => state.preloginReducer;
+export const preloginReducer = (state: PreloginState) => state;
 
 
-export const getPreloginSelector = createSelector(prelogin, p => {
-    return {
-        p
-    };
-});
+export const preloginData = createSelector(
+  preloginReducer,
+  state => {
+    console.log(state);
+    return state;
+  }
+);
+

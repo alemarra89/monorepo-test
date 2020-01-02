@@ -13,5 +13,5 @@ export default history =>
   combineReducers({
     router: connectRouter(history),
     // form: formReducer,
-    preloginReducer
+    prelogin: preloginReducer
   });
