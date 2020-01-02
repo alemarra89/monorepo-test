@@ -16,7 +16,7 @@ export interface ErrorState {
 }
 
 export interface PreloginParams {
-    abi: number,
+    abi: string,
     canale: string
 }
 

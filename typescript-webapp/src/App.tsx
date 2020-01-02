@@ -1,11 +1,9 @@
-import React, { Props } from 'react';
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { Props } from './AppContainer';
 
-const App: React.FC<Props<any>> = (props: any) => {
-
-  console.log('mario', typeof props);
-  console.log('props', props);
+const App: React.FC<Props> = props => {
 
   return (
     <div className="App">
