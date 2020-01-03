@@ -8,107 +8,92 @@
  * @format
  */
 
-import React, { Fragment } from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import React from 'react';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import { createAppContainer } from 'react-navigation';
+import { connect, Provider } from 'react-redux';
+import RootSwitchNavigator from './src/RootSwitchNavigator';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+// import rootReducer from './src/reducers';
+import thunk from 'redux-thunk';
+import { createReactNavigationReduxMiddleware, createReduxContainer, createNavigationReducer } from 'react-navigation-redux-helpers';
+import { preloginReducer } from '@sparkasse/commons';
 
-const App = () => {
+declare var GLOBAL: any;
+declare var global: any;
+GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
+global.Blob = null
 
-  GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
+const AppNavigator = createAppContainer(RootSwitchNavigator);
 
-  return (
-    <Fragment>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </Fragment>
-  );
-};
+const navReducer = createNavigationReducer(AppNavigator);
 
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
+const appReducer = combineReducers({
+  nav: navReducer,
+  prelogin: preloginReducer
 });
 
-export default App;
+const middleware = createReactNavigationReduxMiddleware(
+  (state:any) => state.nav,
+);
+
+const App = createReduxContainer(AppNavigator);
+const mapStateToProps = (state) => ({
+  state: state.nav,
+});
+const AppWithNavigationState = connect(mapStateToProps)(App);
+
+
+const myStorageGet = param => {
+  return sessionStorage.getItem(param);
+};
+
+const myStorageSet = (param, value) => {
+  sessionStorage.setItem(param, value);
+};
+
+const asyncStorageGet = key => {
+  const value = sessionStorage.getItem(key);
+  return Promise.resolve(value);
+};
+
+const asyncStorageSet = (key, value) => {
+  sessionStorage.setItem(key, value);
+  return Promise.resolve();
+};
+
+const middlewares = [
+  thunk.withExtraArgument({
+    authSelector: () => ({}),
+    fetchRuntime: fetch,
+    platform: "desktop",
+    storeItem: myStorageSet,
+    getItem: myStorageGet,
+    asyncStorageGet,
+    asyncStorageSet,
+    // ...environment
+  }),
+  // LogRocket.reduxMiddleware(),
+  // IllimityGTM.createGTMMiddleware(IllimityGTM.eventsMap)
+];
+
+const enhancer = compose(
+  applyMiddleware(middleware, ...middlewares), (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+const store = createStore(
+  appReducer,
+  enhancer
+);
+
+class Root extends React.Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <AppWithNavigationState />
+      </Provider>
+    )
+  }
+}
+
+export default Root;

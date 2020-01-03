@@ -66,7 +66,22 @@ export const getPrelogin = (preloginParams: PreloginParams): ThunkAction<void, P
 
 // Implementation code where T is the returned data shape
 function api<T>(url: string): Promise<T> {
-  return fetch(url)
+
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  myHeaders.append("Accept", "application/json");
+
+  var myInit: RequestInit = {
+    method: 'GET',
+    headers: myHeaders,
+    mode: 'cors',
+    cache: 'default'
+  };
+
+  var myRequest = new Request(url, myInit);
+
+
+  return fetch(myRequest)
     .then(response => {
       if (!response.ok) {
         throw new Error(response.statusText)

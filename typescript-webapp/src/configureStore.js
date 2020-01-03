@@ -4,7 +4,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 // import { createLogger } from "redux-logger";
 import { createBrowserHistory } from "history";
-import { routerMiddleware, push } from "connected-react-router";
+import { routerMiddleware } from "connected-react-router";
 // import { BASE_API_URLS_KEYS } from "@illimity/rtl-commons";
 // import IllimityGTM from "@illimity/commons/src/rtl-gtm";
 // import { RESET_APP } from "@illimity/commons/src/rtl-login-sca-state";
@@ -62,8 +62,7 @@ const createEnhancers = () => {
     thunk.withExtraArgument({
       authSelector: () => ({}),
       fetchRuntime: fetch,
-      platform: "web",
-      navigateAction: dispatch => route => dispatch(push(route)),
+      platform: "desktop",
       storeItem: myStorageSet,
       getItem: myStorageGet,
       asyncStorageGet,

@@ -12,9 +12,6 @@
   "devDependencies": {
     "typescript": "^3.7.4"
   },
-  "peerDependencies": {
-    "change-case": "^4.1.1"
-  },
   "dependencies": {
     "reselect": "^4.0.0"
   }
