@@ -1,7 +1,10 @@
 {
     "version": "1.0.0",
     "description": "Package.json del monorepo",
-    "scripts": {},
+    "scripts": {
+        "clean": "npm install && node config/scripts/clean.js",
+        "build-web": "node config/scripts/build-web.js"
+    },
     "author": "Alessandro Marra",
     "license": "ISC",
     "dependencies": {
@@ -10,5 +13,11 @@
         "react-redux": "^7.1.3",
         "redux": "^4.0.5",
         "redux-thunk": "^2.3.0"
+    },
+    "devDependencies": {
+        "chalk": "^3.0.0",
+        "child_process": "^1.0.2",
+        "fs": "0.0.1-security",
+        "rimraf": "^3.0.0"
     }
 }
