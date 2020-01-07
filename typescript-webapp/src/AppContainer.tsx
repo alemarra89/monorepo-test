@@ -2,9 +2,10 @@ import { connect } from 'react-redux'
 import App from './App'
 import { PreloginState, PreloginParams, GetPreloginStartAction, getPrelogin, preloginData } from '@sparkasse/commons';
 import { ThunkDispatch } from 'redux-thunk';
+import { RootState } from '@sparkasse/commons/build/prelogin/types';
 
-const mapStateToProps = (state: PreloginState) => ({
-  preloginData: preloginData(state)
+const mapStateToProps = (state: RootState) => ({
+  prelogin: preloginData(state.prelogin)
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<PreloginState, null, GetPreloginStartAction>) => ({

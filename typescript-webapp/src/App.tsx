@@ -5,24 +5,18 @@ import { Props } from './AppContainer';
 
 const App: React.FC<Props> = props => {
 
+  console.log('props', props);
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-          <br />
-          Ma soprattutto GRANDE CORVINO!
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <button onClick={() => {props.onGetPreloginClick({canale: 'mobile', abi: '06085'})}} value="test">Test</button>
+        <p>Premi il pulsante seguente e io farò una chiamata rest per recuperare il nome della tua banca</p>
+        <button onClick={() => { props.onGetPreloginClick({ canale: 'mobile', abi: '06045' }) }} value="test">Pulsante seguente</button>
+        { props.prelogin.codiceGruppo && (
+          <p>
+            Banca: { props.prelogin.codiceGruppo }
+          </p>
+        ) }
       </header>
     </div>
   );

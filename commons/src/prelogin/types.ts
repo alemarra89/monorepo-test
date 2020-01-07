@@ -1,3 +1,4 @@
+import { Reducer } from "redux";
 
 export const GET_PRELOGIN_START: string = 'prelogin/get-prelogin-start';
 export const GET_PRELOGIN_SUCCESS: string = 'prelogin/get-prelogin-success';
@@ -7,6 +8,11 @@ export interface PreloginState {
     codiceGruppo: string;
     codiceIstituto: number;
     codiceAbi: string;
+}
+
+export interface RootState {
+    nav: Reducer,
+    prelogin: PreloginState
 }
 
 export interface ErrorState {

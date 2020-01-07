@@ -5,14 +5,24 @@ import { Props } from './PreloginContainer';
 
 const PreloginScreen: React.FC<Props> = props => {
 
-    console.log(props);
+    console.log('props', props);
     return (
         <View>
             <Text>
-                Grande Corvino!!!
-        </Text>
-            <Button onPress={() => props.onGetPreloginClick({abi: '03104', canale: 'desktop'})}
-                title="asd"></Button>
+                Premi il pulsante seguente e io farò una chiamata rest per recuperare il nome della tua banca
+            </Text>
+            <Button
+                onPress={() => props.onGetPreloginClick({ abi: '06045', canale: 'desktop' })}
+                title="Pulsante seguente" />
+            <Text>
+                {
+                    props.preloginData.codiceGruppo && (
+                        <Text>
+                            Banca: {props.preloginData.codiceGruppo}
+                        </Text>
+                    )
+                }
+            </Text>
 
         </View>
     )

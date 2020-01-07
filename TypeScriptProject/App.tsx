@@ -18,6 +18,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { createReactNavigationReduxMiddleware, createReduxContainer, createNavigationReducer } from 'react-navigation-redux-helpers';
 import { preloginReducer } from '@sparkasse/commons';
+import { RootState } from '@sparkasse/commons/build/prelogin/types';
 
 declare var GLOBAL: any;
 declare var global: any;
@@ -34,7 +35,7 @@ const appReducer = combineReducers({
 });
 
 const middleware = createReactNavigationReduxMiddleware(
-  (state:any) => state.nav,
+  (state:RootState) => state.nav,
 );
 
 const App = createReduxContainer(AppNavigator);
