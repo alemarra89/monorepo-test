@@ -2,7 +2,7 @@
     "version": "1.0.0",
     "description": "Package.json del monorepo",
     "scripts": {
-        "clean": "npm install && node config/scripts/clean.js",
+        "clean-install": "npm install && node config/scripts/clean-install.js",
         "build-web": "node config/scripts/build-web.js"
     },
     "author": "Alessandro Marra",
